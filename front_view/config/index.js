@@ -20,7 +20,7 @@ module.exports = {
     notifyOnErrors: true,
     poll: false, // https://webpack.js.org/configuration/dev-server/#devserver-watchoptions-
 
-    
+
     /**
      * Source Maps
      */
@@ -32,7 +32,16 @@ module.exports = {
     // set this to false - it *may* help
     // https://vue-loader.vuejs.org/en/options.html#cachebusting
     cacheBusting: true,
-
+    //跨域请求代理
+    proxyTable: {
+      '/api': {  //使用"/api"来代替"http://f.apiplus.c"
+        target: '127.0.0.1:5000', //源地址
+        changeOrigin: true, //改变源
+        pathRewrite: {
+          '^/api': '127.0.0.1:5000' //路径重写
+          }
+      }
+    },
     cssSourceMap: true
   },
 
@@ -65,5 +74,7 @@ module.exports = {
     // `npm run build --report`
     // Set to `true` or `false` to always turn it on or off
     bundleAnalyzerReport: process.env.npm_config_report
-  }
+  },
+
+  
 }

@@ -1,28 +1,27 @@
 <template>
-  <div id="app">
-    <img src="./assets/logo.png">
-    <HelloWorld/>
-  </div>
+  <button id="btn" @click="reqSgin">点我签到</button>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld'
-
+import axios from 'axios';
 export default {
   name: 'App',
-  components: {
-    HelloWorld
-  }
+	methods: {
+		reqSgin(){
+			axios.get('/api/sgin')
+				.then(
+					(data) => {
+						console.log(data);
+					},
+					(err) => {
+						console.log('请求失败，报错信息如下');
+						console.log(err);
+					}
+				);
+		}
+	}
 }
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
 </style>
