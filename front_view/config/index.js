@@ -35,10 +35,10 @@ module.exports = {
     //跨域请求代理
     proxyTable: {
       '/api': {  //使用"/api"来代替"http://f.apiplus.c"
-        target: '127.0.0.1:5000', //源地址
+        target: 'http://127.0.0.1:5000', //源地址
         changeOrigin: true, //改变源
         pathRewrite: {
-          '^/api': '127.0.0.1:5000' //路径重写
+          '^/api': 'http://127.0.0.1:5000' //路径重写
           }
       }
     },
@@ -76,5 +76,5 @@ module.exports = {
     bundleAnalyzerReport: process.env.npm_config_report
   },
 
-  
+
 }
