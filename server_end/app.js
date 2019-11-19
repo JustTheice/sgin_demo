@@ -2,7 +2,18 @@ const express = require('express');
 const app = express()
 const port = 5000
 const fs = require('fs');
-let toDay = 17; //记录当天是几号
+let toDay = 19; //记录当天是几号
+
+//允许跨域
+app.all('*', function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Content-Type,Content-Length, Authorization, Accept,X-Requested-With");
+    res.header("Access-Control-Allow-Methods","PUT,POST,GET,DELETE,OPTIONS");
+    res.header("X-Powered-By",' 3.2.1')
+    if(req.method=="OPTIONS") res.send(200);/*让options请求快速返回*/
+    else  next();
+});
+
 
 app.get('/sign', (req, res) => {
 	let userName = req.query.name;
@@ -77,8 +88,8 @@ function watchDay(){
 	//每隔一段时间检查一次当前是几号，如果发生变化，则处理用户数据并更新记录
 	setInterval(() => {
 		let date = new Date();
-		let nowH = date.getHours();
-		if(nowH!=toDay){
+		let nowDay = date.getHours();
+		if(nowDay!=toDay){
 			getData((ret) => {
 				ret.forEach((item,index) => {
 					//1.判断连续签到
@@ -95,7 +106,7 @@ function watchDay(){
 				})
 			});
 			//3.更新日期
-			toDay = nowH;
+			toDay = nowDay;
 		}
 	},3000);
 }
