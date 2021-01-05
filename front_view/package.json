@@ -12,7 +12,7 @@
     "build": "node build/build.js"
   },
   "dependencies": {
-    "axios": "^0.19.0",
+    "axios": "^0.21.1",
     "axois": "0.0.1-security",
     "less": "^3.10.3",
     "less-loader": "^5.0.0",
